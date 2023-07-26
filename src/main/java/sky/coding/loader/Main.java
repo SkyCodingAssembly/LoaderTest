@@ -4,7 +4,6 @@ import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraft.command.ICommand;
 import sky.coding.loader.commands.MainCommand;
 import sky.coding.loader.commands.SWQOL;
-import sky.coding.loader.config.SkyCodingConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -14,6 +13,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import sky.coding.loader.config.*;
+
 
 import java.util.ArrayList;
 import java.util.List;

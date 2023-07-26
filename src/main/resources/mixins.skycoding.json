@@ -1,0 +1,12 @@
+
+{
+  "minVersion": "0.7",
+  "compatibilityLevel": "JAVA_8",
+  "package": "sky.coding.loader.mixins",
+  "refmap": "mixins.skycoding.refmap.json",
+  "verbose": true,
+  "mixins": [
+  ],
+  "client": [
+  ]
+}

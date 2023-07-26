@@ -1,8 +1,6 @@
 package sky.coding.loader;
 
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
-import gg.essential.elementa.effects.StencilEffect;
-import kotlin.jvm.internal.Intrinsics;
 import net.minecraft.command.ICommand;
 import sky.coding.loader.commands.MainCommand;
 import sky.coding.loader.commands.SWQOL;
@@ -16,15 +14,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 @Mod(modid = ModInfoGlobal.MOD_ID, name = ModInfoGlobal.MOD_NAME, version = ModInfoGlobal.VERSION)
 public class Main {
@@ -38,7 +31,7 @@ public class Main {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-
+        config = new SkyCodingConfig();
         CommandManager.INSTANCE.registerCommand(new MainCommand());
         ClientCommandHandler.instance.registerCommand(new SWQOL());
         List<ICommand> commands = new ArrayList<>();

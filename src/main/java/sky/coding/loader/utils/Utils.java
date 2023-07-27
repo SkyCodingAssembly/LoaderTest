@@ -1,4 +1,4 @@
-package sky.coding.loader;
+package sky.coding.loader.utils;
 
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
@@ -28,6 +28,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import sky.coding.loader.Main;
 
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;

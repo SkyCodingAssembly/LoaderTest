@@ -1,6 +1,7 @@
 package sky.coding.loader;
 
 import cc.polyfrost.oneconfig.utils.commands.CommandManager;
+;
 import net.minecraft.command.ICommand;
 import sky.coding.loader.commands.MainCommand;
 import sky.coding.loader.commands.SWQOL;
@@ -14,8 +15,12 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import sky.coding.loader.config.*;
+import sky.coding.loader.modules.EventHandler;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +30,13 @@ public class Main {
 
     @Mod.Instance(ModInfoGlobal.MOD_ID)
     public static Main INSTANCE;
-    public SkyCodingConfig config;
+    public static SkyCodingConfig config;
     public static Minecraft mc = Minecraft.getMinecraft();
     public static EntityPlayerSP mcPlayer = mc.thePlayer;
     public static WorldClient mcWorld = mc.theWorld;
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException {
         config = new SkyCodingConfig();
         CommandManager.INSTANCE.registerCommand(new MainCommand());
         ClientCommandHandler.instance.registerCommand(new SWQOL());
@@ -39,9 +44,7 @@ public class Main {
         List<KeyBinding> keybinds = new ArrayList<>();
         List<Object> registry = new ArrayList<>();
         commands.add(new SWQOL());
-
-
-        //registry.add(new ModInputHandler());
+        registry.add(new EventHandler());
         keybinds.forEach(ClientRegistry::registerKeyBinding);
         commands.forEach(ClientCommandHandler.instance::registerCommand);
         registry.forEach(MinecraftForge.EVENT_BUS::register);

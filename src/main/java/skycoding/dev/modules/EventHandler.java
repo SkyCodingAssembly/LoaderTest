@@ -1,19 +1,18 @@
-package sky.coding.loader.modules;
+package skycoding.dev.modules;
 
-import cc.polyfrost.oneconfig.events.event.ChatSendEvent;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.lwjgl.input.Keyboard;
-import sky.coding.loader.events.SendChatMessageEvent;
+import skycoding.dev.events.SendChatMessageEvent;
+import skycoding.dev.utils.GroovyUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +20,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static skycoding.dev.utils.GroovyUtils.isPlayerInGame;
+
 public class EventHandler {
     public static List<GroovyObject> events = new ArrayList<>();
     public static void ReloadClasses() throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        if (isPlayerInGame()) {
+            GroovyUtils.ShowMessageInChat(EnumChatFormatting.YELLOW + "[SkyCoding]", "Reloading Modules!");
+        }
         events.clear();
         GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
         File directorypath = new File("./config/SkyCoding");
@@ -34,9 +38,14 @@ public class EventHandler {
                     Class<?> groovyClass = groovyClassLoader.parseClass(new File("./config/SkyCoding/" + content));
                     GroovyObject groovyObject = (GroovyObject) groovyClass.getDeclaredConstructor().newInstance();
                     events.add(groovyObject);
-                    Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Loaded "+ content.replace(".groovy","")));
+                    if (isPlayerInGame()) {
+                        GroovyUtils.ShowMessageInChat(EnumChatFormatting.YELLOW + "[SkyCoding]", "Loaded " + content.replace(".groovy", ""));
+                    }
                 }
             }
+        }
+        if (isPlayerInGame()) {
+            GroovyUtils.ShowMessageInChat(EnumChatFormatting.YELLOW + "[SkyCoding]", "Finished Loading!");
         }
     }
     @SubscribeEvent
@@ -152,7 +161,6 @@ public class EventHandler {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (!events.isEmpty()) {
-            KeyBinding blah = new KeyBinding("", Keyboard.KEY_N,"EnderFlame");
             for (GroovyObject groovyObject : events) {
                 try {
                     groovyObject.invokeMethod("KeyInput", new Object[]{event});

@@ -1,6 +1,6 @@
-package sky.coding.loader.mixins;
+package skycoding.dev.mixins;
 
-import sky.coding.loader.events.SendChatMessageEvent;
+import skycoding.dev.events.SendChatMessageEvent;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;

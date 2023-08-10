@@ -1,4 +1,4 @@
-package sky.coding.loader.interfaces;
+package skycoding.dev.interfaces;
 
 public interface Module {
     boolean toggled();

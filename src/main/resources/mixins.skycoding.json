@@ -2,7 +2,7 @@
 {
   "minVersion": "0.7",
   "compatibilityLevel": "JAVA_8",
-  "package": "sky.coding.loader.mixins",
+  "package": "skycoding.dev.mixins",
   "refmap": "mixins.skycoding.refmap.json",
   "verbose": true,
   "mixins": [

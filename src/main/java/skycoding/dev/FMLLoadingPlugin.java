@@ -1,4 +1,4 @@
-package sky.coding.loader;
+package skycoding.dev;
 
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;

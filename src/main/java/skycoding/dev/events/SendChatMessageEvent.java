@@ -1,4 +1,4 @@
-package sky.coding.loader.events;
+package skycoding.dev.events;
 
 import net.minecraftforge.fml.common.eventhandler.Cancelable;
 import net.minecraftforge.fml.common.eventhandler.Event;
